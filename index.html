@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <title>D&amp;D Helper</title>
+    <link rel="stylesheet" href="static/Resources/CSS/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <div class="title">D&amp;D Helper - Coded by: Kyle Hutchinson</div>
+    <hr> Player Name:
+    <input type="text" id="playerName" value="Adventurer" onchange="playerNameChange()"> Select your color:
+    <input type="color" id="playerColor" value="#ffffff" onchange="playerColorChange()">
+    <hr>
+    <div class="menu">
+        <button onclick="createToken()">Create Token</button>
+    </div>
+    <div id="mapAndChat">
+        <canvas id="canvas"></canvas>
+        <div id="chatBox">
+            <div class="center">
+                Chat Box
+                <hr>
+            </div>
+            <div id="chatText"></div>
+            <input type="text" id="chatInput">
+            <button onclick="sendChat()">Send</button>
+        </div>
+    </div>
+</body>
+
+<script src="static/Resources/JavaScript/globals.js"></script>
+<script src="static/Resources/JavaScript/chatBox.js"></script>
+<script src="static/Resources/JavaScript/mouse.js"></script>
+<script src="/static/Resources/JavaScript/game.js"></script>
+<script src="static/Resources/JavaScript/render.js"></script>
+
+</html>

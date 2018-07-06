@@ -1,0 +1,40 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+canvas {
+    border: 1px solid white;
+}
+
+.title {
+    font-size: 1.5em;
+}
+
+.center {
+    text-align: center;
+}
+
+#mapAndChat {
+    display: flex;
+    margin-top: 10px;
+}
+
+#chatBox {
+    border: 1px solid white;
+    margin-left: 10px;
+    padding: 5px;
+    width: 400px;
+}
+
+#chatText {
+    border: 1px solid white;
+    padding: 5px;
+    margin-bottom: 5px;
+    height: 500px;
+    overflow: auto;
+}
+
+#chatInput {
+    width: 85%;
+}
