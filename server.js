@@ -32,12 +32,13 @@ io.on('connection', function (socket) {
         // A new player has connected
         console.log('A new player has connected! ID: ' + socket.id);
         players.newPlayer(socket.id);
+        socket.emit('player data update', players.getPlayers()[socket.id].stats);
+        socket.emit('grid update', gridData);
         io.sockets.emit('chat message', {
             playerName: 'Server',
             message: 'A new player has connected to the server!',
             color: 'white'
         });
-        io.sockets.emit('grid update', gridData);
     });
 
     socket.on('disconnect', function () {

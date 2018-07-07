@@ -1,3 +1,5 @@
+var coc = require('./callOfCthulhu.js');
+
 var players = {};
 
 exports.getPlayers = function () {
@@ -19,7 +21,8 @@ exports.newPlayer = function (id) {
             deltaY: 0,
             token: null
         },
-        canDelete: true
+        canDelete: true,
+        stats: coc.getRandomPlayerStats()
     };
 }
 

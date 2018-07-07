@@ -21,7 +21,7 @@
     <input type="radio" name="diceSides" value="20" onclick="diceRollUpdate()" checked>20
     <input type="radio" name="diceSides" value="100" onclick="diceRollUpdate()">100
     <button onclick="roll()">ROLL
-        <span id="diceRollText">1 d20</span>!
+        <span id="diceRollText">1D20</span>!
     </button>
     <hr>
     <div class="menu">
@@ -37,6 +37,10 @@
     </div>
     <div id="mapAndChat">
         <canvas id="canvas"></canvas>
+        <div id="playerSheet">
+            <div class="center">Player Sheet</div>
+            <div id="playerData"></div>
+        </div>
         <div id="chatBox">
             <div class="center">Chat Box</div>
             <div id="chatText"></div>

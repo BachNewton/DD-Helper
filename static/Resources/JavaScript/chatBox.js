@@ -24,14 +24,8 @@ socket.on('roll', function (data) {
     text += getColoredHTMLText(player.color, player.name);
     text += ' rolled ';
     text += diceAmount;
-    text += ' ';
+    text += 'D';
     text += diceSides;
-    text += ' sided ';
-    if (diceAmount > 1) {
-        text += 'dice';
-    } else {
-        text += 'die';
-    }
     text += ' and got a: ';
     text += getColoredHTMLText('cyan', amount);
     text += '!';

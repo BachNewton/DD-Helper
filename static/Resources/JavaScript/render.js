@@ -76,3 +76,26 @@ function getBestFontSize(width, text) {
 
     return guess + font;
 }
+
+socket.on('player data update', function (stats) {
+    var text = '<div class="cols">';
+
+    text += '<div>';
+    for (var stat in stats) {
+        text += stat;
+        text += ': ';
+        text += '<br>';
+    }
+    text += '</div>';
+
+    text += '<div>';
+    for (var stat in stats) {
+        text += stats[stat];
+        text += '<br>';
+    }
+    text += '</div>';
+
+    text += '</div>';
+
+    document.getElementById('playerData').innerHTML = text;
+});

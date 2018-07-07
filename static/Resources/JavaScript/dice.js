@@ -15,12 +15,7 @@ function getDiceSides() {
 function diceRollUpdate() {
     var diceAmount = getDiceAmount();
     var diceSides = getDiceSides();
-
-    var text = diceAmount + ' d' + diceSides;
-    if (diceAmount > 1) {
-        text += 's';
-    }
-
+    var text = diceAmount + 'D' + diceSides;
     document.getElementById('diceRollText').innerHTML = text;
 }
 
