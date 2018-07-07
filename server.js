@@ -67,6 +67,10 @@ io.on('connection', function (socket) {
         players.mouseUp(socket.id);
     });
 
+    socket.on('scroll wheel', function (change) {
+        players.scrollWheel(socket.id, change, tokens.getTokens());
+    });
+
     socket.on('key down', function (keyCode) {
         players.keyDown(socket.id, keyCode);
     });
@@ -118,7 +122,7 @@ io.on('connection', function (socket) {
 setInterval(function () {
     players.updateHeldTokens(tokens.getTokens());
     players.moveHeldTokens(tokens.getTokens());
-    tokens.removeTokens(players.getPlayers());
+    players.removeTokens(tokens.getTokens());
 
     var state = {
         players: players.getPlayers(),

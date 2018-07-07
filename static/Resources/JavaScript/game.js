@@ -36,10 +36,11 @@ function removeAllTokens() {
 
 function howToUse() {
     var text = '';
-    text += 'How to use:\n\n';
-    text += '- To create a new token, press the button or press \'T\'\n';
-    text += '- Click and drag tokens to move them\n';
-    text += '- Shift + click on tokens to remove them';
+    text += 'How to use:\n';
+    text += '\n- To create a new token, press the button or press \'T\'';
+    text += '\n- Click and drag tokens to move them';
+    text += '\n- Shift + click on tokens to remove them';
+    text += '\n- Scroll over a token to change its size';
     alert(text);
 }
 

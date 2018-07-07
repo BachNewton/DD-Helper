@@ -47,6 +47,24 @@ exports.mouseUp = function (id) {
     }
 }
 
+exports.scrollWheel = function (id, change, tokens) {
+    if (players[id] != undefined) {
+        var player = players[id];
+
+        for (var i = tokens.length - 1; i >= 0; i--) {
+            var token = tokens[i];
+
+            if (playerOverToken(player, token)) {
+                token.size += change;
+                if (token.size < 1) {
+                    token.size = 1;
+                }
+                break;
+            }
+        }
+    }
+}
+
 exports.keyDown = function (id, keyCode) {
     if (players[id] != undefined) {
         players[id].keysHeld[keyCode] = true;
@@ -80,7 +98,7 @@ exports.updateHeldTokens = function (tokens) {
                 for (var i = tokens.length - 1; i >= 0; i--) {
                     var token = tokens[i];
 
-                    if (Math.hypot(player.mouse.x - token.x, player.mouse.y - token.y) <= token.size) {
+                    if (playerOverToken(player, token)) {
                         player.held = {
                             deltaX: player.mouse.x - token.x,
                             deltaY: player.mouse.y - token.y,
@@ -106,4 +124,27 @@ exports.moveHeldTokens = function () {
             token.y = player.mouse.y - player.held.deltaY;
         }
     }
+}
+
+exports.removeTokens = function (tokens) {
+    for (var id in players) {
+        var player = players[id];
+
+        // Shift
+        if (player.mouse.down && player.keysHeld[16] && player.canDelete) {
+            for (var i = tokens.length - 1; i >= 0; i--) {
+                var token = tokens[i];
+
+                if (playerOverToken(player, token)) {
+                    tokens.splice(i, 1);
+                    player.canDelete = false;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+function playerOverToken(player, token) {
+    return Math.hypot(player.mouse.x - token.x, player.mouse.y - token.y) <= token.size;
 }
