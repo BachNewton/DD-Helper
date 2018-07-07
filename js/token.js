@@ -49,3 +49,7 @@ exports.removeTokens = function (players) {
         }
     }
 }
+
+exports.removeAll = function () {
+    tokens = [];
+}

@@ -4,7 +4,6 @@ canvas.addEventListener('mouseup', mouseUp);
 
 function updateMousePosition(event) {
     var rect = canvas.getBoundingClientRect();
-    var mouse = {};
     mouse.x = event.clientX - rect.left;
     mouse.y = event.clientY - rect.top;
     

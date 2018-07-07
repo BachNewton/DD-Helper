@@ -25,9 +25,11 @@
     </button>
     <hr>
     <div class="menu">
-        <button onclick="createToken()">Create Token</button>
+        <button onclick="howToUse()">How to use</button>
+        <button onclick="createDefaultToken()">Create Token</button>
         Size:
         <input type="range" min="5" max="100" value="25" id="tokenSize">
+        <button onclick="removeAllTokens()">Remove all tokens</button>
     </div>
     <div id="mapAndChat">
         <canvas id="canvas"></canvas>
@@ -45,6 +47,7 @@
 <script src="static/Resources/JavaScript/mouse.js"></script>
 <script src="static/Resources/JavaScript/dice.js"></script>
 <script src="/static/Resources/JavaScript/game.js"></script>
+<script src="static/Resources/JavaScript/keyboard.js"></script>
 <script src="static/Resources/JavaScript/render.js"></script>
 
 </html>

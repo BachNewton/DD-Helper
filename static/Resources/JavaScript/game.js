@@ -1,14 +1,6 @@
 // First connect
 socket.emit('new player');
 
-document.addEventListener('keydown', function (event) {
-    socket.emit('key down', event.keyCode);
-});
-
-document.addEventListener('keyup', function (event) {
-    socket.emit('key up', event.keyCode);
-});
-
 function playerNameChange() {
     var name = document.getElementById('playerName').value;
     socket.emit('player name change', name);
@@ -19,15 +11,34 @@ function playerColorChange() {
     socket.emit('player color change', color);
 }
 
-function createToken() {
-    var size = parseInt(document.getElementById('tokenSize').value);
-    
+function getTokenSize() {
+    return parseInt(document.getElementById('tokenSize').value);
+}
+
+function createDefaultToken() {
+    createToken(canvas.width * 0.25, canvas.height * 0.25, 'Token', getTokenSize());
+}
+
+function createToken(x, y, type, size) {
     var tokenInfo = {
-        x: canvas.width * 0.25,
-        y: canvas.height * 0.25,
-        type: 'Token',
+        x: x,
+        y: y,
+        type: type,
         size: size
     };
 
     socket.emit('new token', tokenInfo);
+}
+
+function removeAllTokens() {
+    socket.emit('remove all tokens');
+}
+
+function howToUse() {
+    var text = '';
+    text += 'How to use:\n\n';
+    text += '- To create a new token, press the button or press \'T\'\n';
+    text += '- Click and drag tokens to move them\n';
+    text += '- Shift + click on tokens to remove them';
+    alert(text);
 }

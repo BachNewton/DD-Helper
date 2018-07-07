@@ -85,6 +85,10 @@ io.on('connection', function (socket) {
         tokens.newToken(tokenInfo);
     });
 
+    socket.on('remove all tokens', function () {
+        tokens.removeAll();
+    });
+
     socket.on('roll', function (data) {
         var player = players.getPlayers()[socket.id];
 
