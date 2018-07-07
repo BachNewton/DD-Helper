@@ -26,14 +26,13 @@
     <hr>
     <div class="menu">
         <button onclick="createToken()">Create Token</button>
+        Size:
+        <input type="range" min="5" max="100" value="25" id="tokenSize">
     </div>
     <div id="mapAndChat">
         <canvas id="canvas"></canvas>
         <div id="chatBox">
-            <div class="center">
-                Chat Box
-                <hr>
-            </div>
+            <div class="center">Chat Box</div>
             <div id="chatText"></div>
             <input type="text" id="chatInput">
             <button onclick="sendChat()">Send</button>

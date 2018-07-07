@@ -1,7 +1,7 @@
 socket.on('state', function (state) {
     var players = state.players;
     var tokens = state.tokens;
-    
+
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
 
     for (var i = 0; i < tokens.length; i++) {
@@ -13,14 +13,15 @@ socket.on('state', function (state) {
         ctx.fill();
 
         ctx.fillStyle = 'black';
-        ctx.font = '24px Arial';
+        ctx.font = getBestFontSize(token.size * 2 * 0.85, token.type);
         ctx.textAlign = 'center';
-        ctx.fillText(token.type, token.x, token.y + 9);
+        ctx.textBaseline = "middle";
+        ctx.fillText(token.type, token.x, token.y);
     }
 
     for (var id in players) {
         var player = players[id];
-        
+
         ctx.fillStyle = player.color;
         ctx.beginPath();
         ctx.arc(player.mouse.x, player.mouse.y, 5, 0, 2 * Math.PI);
@@ -28,6 +29,29 @@ socket.on('state', function (state) {
 
         ctx.font = '12px Arial';
         ctx.textAlign = 'center';
+        ctx.textBaseline = "bottom";
         ctx.fillText(player.name, player.mouse.x, player.mouse.y - 10);
     }
 });
+
+function getBestFontSize(width, text) {
+    var min = 0;
+    var max = 1000;
+    var guess;
+    var font = 'px sans-serif';
+
+    do {
+        guess = (min + max) / 2;
+
+        ctx.font = guess + font;
+        var diff = ctx.measureText(text).width - width;
+
+        if (diff > 0) {
+            max = guess;
+        } else if (diff < 0) {
+            min = guess;
+        }
+    } while (Math.abs(diff) > 1);
+
+    return guess + font;
+}

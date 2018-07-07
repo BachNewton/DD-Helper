@@ -20,10 +20,13 @@ function playerColorChange() {
 }
 
 function createToken() {
+    var size = parseInt(document.getElementById('tokenSize').value);
+    
     var tokenInfo = {
-        x: canvas.width / 2,
-        y: canvas.height / 2,
-        type: 'Token'
+        x: canvas.width * 0.25,
+        y: canvas.height * 0.25,
+        type: 'Token',
+        size: size
     };
 
     socket.emit('new token', tokenInfo);
