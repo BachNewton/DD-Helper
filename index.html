@@ -10,7 +10,19 @@
     <div class="title">D&amp;D Helper - Coded by: Kyle Hutchinson</div>
     <hr> Player Name:
     <input type="text" id="playerName" value="Adventurer" onchange="playerNameChange()"> Select your color:
-    <input type="color" id="playerColor" value="#ffffff" onchange="playerColorChange()">
+    <input type="color" id="playerColor" value="#ffffff" onchange="playerColorChange()"> Roll:
+    <input type="range" min="1" max="6" value="1" id="diceAmount" oninput="diceRollUpdate()">
+    <input type="radio" name="diceSides" value="2" onclick="diceRollUpdate()">2
+    <input type="radio" name="diceSides" value="4" onclick="diceRollUpdate()">4
+    <input type="radio" name="diceSides" value="6" onclick="diceRollUpdate()">6
+    <input type="radio" name="diceSides" value="8" onclick="diceRollUpdate()">8
+    <input type="radio" name="diceSides" value="10" onclick="diceRollUpdate()">10
+    <input type="radio" name="diceSides" value="12" onclick="diceRollUpdate()">12
+    <input type="radio" name="diceSides" value="20" onclick="diceRollUpdate()" checked>20
+    <input type="radio" name="diceSides" value="100" onclick="diceRollUpdate()">100
+    <button onclick="roll()">ROLL
+        <span id="diceRollText">1 d20</span>!
+    </button>
     <hr>
     <div class="menu">
         <button onclick="createToken()">Create Token</button>
@@ -32,6 +44,7 @@
 <script src="static/Resources/JavaScript/globals.js"></script>
 <script src="static/Resources/JavaScript/chatBox.js"></script>
 <script src="static/Resources/JavaScript/mouse.js"></script>
+<script src="static/Resources/JavaScript/dice.js"></script>
 <script src="/static/Resources/JavaScript/game.js"></script>
 <script src="static/Resources/JavaScript/render.js"></script>
 

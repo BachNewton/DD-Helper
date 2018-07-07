@@ -24,7 +24,7 @@ canvas {
     border: 1px solid white;
     margin-left: 10px;
     padding: 5px;
-    width: 400px;
+    width: 425px;
 }
 
 #chatText {
@@ -36,5 +36,5 @@ canvas {
 }
 
 #chatInput {
-    width: 85%;
+    width: 87%;
 }

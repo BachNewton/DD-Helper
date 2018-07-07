@@ -6,6 +6,7 @@ var socketIO = require('socket.io');
 
 var players = require('./js/player.js');
 var tokens = require('./js/token.js');
+var dice = require('./js/dice.js');
 
 var app = express();
 var server = http.Server(app);
@@ -83,6 +84,23 @@ io.on('connection', function (socket) {
     socket.on('new token', function (tokenInfo) {
         tokens.newToken(tokenInfo);
     });
+
+    socket.on('roll', function (data) {
+        var player = players.getPlayers()[socket.id];
+
+        if (player != undefined) {
+            var amount = dice.roll(data.diceAmount, data.diceSides);
+
+            console.log(player.name + ' rolled a: ' + amount);
+
+            io.sockets.emit('roll', {
+                player: player,
+                amount: amount,
+                diceAmount: data.diceAmount,
+                diceSides: data.diceSides
+            });
+        }
+    });
 });
 
 // Client updates
@@ -97,4 +115,4 @@ setInterval(function () {
     };
 
     io.sockets.emit('state', state);
-}, 1000 / 30);
+}, 1000 / 60);
