@@ -7,6 +7,7 @@ var socketIO = require('socket.io');
 var players = require('./js/player.js');
 var tokens = require('./js/token.js');
 var dice = require('./js/dice.js');
+var gridData = { state: false, size: 10 };
 
 var app = express();
 var server = http.Server(app);
@@ -36,6 +37,7 @@ io.on('connection', function (socket) {
             message: 'A new player has connected to the server!',
             color: 'white'
         });
+        io.sockets.emit('grid update', gridData);
     });
 
     socket.on('disconnect', function () {
@@ -104,6 +106,11 @@ io.on('connection', function (socket) {
                 diceSides: data.diceSides
             });
         }
+    });
+
+    socket.on('grid update', function (data) {
+        io.sockets.emit('grid update', data);
+        gridData = data;
     });
 });
 

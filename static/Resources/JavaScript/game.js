@@ -42,3 +42,17 @@ function howToUse() {
     text += '- Shift + click on tokens to remove them';
     alert(text);
 }
+
+function gridChange() {
+    var state = getGridState();
+    var size = getGridSize();
+    socket.emit('grid update', {
+        state: state,
+        size: size
+    });
+}
+
+socket.on('grid update', function (data) {
+    document.getElementById('grid').checked = data.state;
+    document.getElementById('gridSize').value = data.size;
+});

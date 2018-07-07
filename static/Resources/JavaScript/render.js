@@ -4,6 +4,27 @@ socket.on('state', function (state) {
 
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
 
+    if (getGridState()) {
+        var size = getGridSize();
+        var boxSize = canvas.width / size;
+        ctx.strokeStyle = 'gray';
+        ctx.lineWidth = 3;
+
+        for (var x = boxSize; x < canvas.width; x += boxSize) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
+            ctx.stroke();
+        }
+
+        for (var y = boxSize; y < canvas.height; y += boxSize) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+        }
+    }
+
     for (var i = 0; i < tokens.length; i++) {
         var token = tokens[i];
 
