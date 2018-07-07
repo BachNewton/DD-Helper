@@ -6,6 +6,7 @@ exports.getPlayers = function () {
 
 exports.newPlayer = function (id) {
     players[id] = {
+        keysHeld: {},
         mouse: {
             x: 0,
             y: 0,
@@ -17,7 +18,8 @@ exports.newPlayer = function (id) {
             deltaX: 0,
             deltaY: 0,
             token: null
-        }
+        },
+        canDelete: true
     };
 }
 
@@ -41,6 +43,19 @@ exports.mouseDown = function (id) {
 exports.mouseUp = function (id) {
     if (players[id] != undefined) {
         players[id].mouse.down = false;
+        players[id].canDelete = true;
+    }
+}
+
+exports.keyDown = function (id, keyCode) {
+    if (players[id] != undefined) {
+        players[id].keysHeld[keyCode] = true;
+    }
+}
+
+exports.keyUp = function (id, keyCode) {
+    if (players[id] != undefined) {
+        players[id].keysHeld[keyCode] = false;
     }
 }
 

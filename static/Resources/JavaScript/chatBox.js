@@ -1,5 +1,3 @@
-socket.on('chat message', chatMessage);
-
 document.getElementById('chatInput').addEventListener('keydown', function (event) {
     // Enter
     if (event.keyCode == 13) {
@@ -7,7 +5,7 @@ document.getElementById('chatInput').addEventListener('keydown', function (event
     }
 });
 
-function chatMessage(data) {
+socket.on('chat message', function (data) {
     var text = '';
     text += getColoredHTMLText(data.color, data.playerName);
     text += ' - ';
@@ -22,7 +20,7 @@ function chatMessage(data) {
     chatTextElement.innerHTML += text;
 
     chatTextElement.scrollTop = chatTextElement.scrollHeight;
-}
+});
 
 function getColoredHTMLText(color, text) {
     var htmlText = '';

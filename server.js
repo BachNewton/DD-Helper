@@ -30,11 +30,21 @@ io.on('connection', function (socket) {
         // A new player has connected
         console.log('A new player has connected! ID: ' + socket.id);
         players.newPlayer(socket.id);
+        io.sockets.emit('chat message', {
+            playerName: 'Server',
+            message: 'A new player has connected to the server!',
+            color: 'white'
+        });
     });
 
     socket.on('disconnect', function () {
         console.log('A player has disconnected! ID: ' + socket.id);
         players.remove(socket.id);
+        io.sockets.emit('chat message', {
+            playerName: 'Server',
+            message: 'A player has left to the server!',
+            color: 'white'
+        });
     });
 
     socket.on('chat message', function (data) {
@@ -54,6 +64,14 @@ io.on('connection', function (socket) {
         players.mouseUp(socket.id);
     });
 
+    socket.on('key down', function (keyCode) {
+        players.keyDown(socket.id, keyCode);
+    });
+
+    socket.on('key up', function (keyCode) {
+        players.keyUp(socket.id, keyCode);
+    });
+
     socket.on('player name change', function (name) {
         players.nameChange(socket.id, name);
     });
@@ -71,7 +89,8 @@ io.on('connection', function (socket) {
 setInterval(function () {
     players.updateHeldTokens(tokens.getTokens());
     players.moveHeldTokens(tokens.getTokens());
-    
+    tokens.removeTokens(players.getPlayers());
+
     var state = {
         players: players.getPlayers(),
         tokens: tokens.getTokens()
