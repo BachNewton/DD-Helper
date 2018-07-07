@@ -89,7 +89,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('new token', function (tokenInfo) {
-        tokens.newToken(tokenInfo);
+        tokens.newToken(tokenInfo, socket.id);
     });
 
     socket.on('remove all tokens', function () {

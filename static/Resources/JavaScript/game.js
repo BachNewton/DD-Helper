@@ -23,6 +23,10 @@ function createDefaultToken() {
     createToken(canvas.width * 0.25, canvas.height * 0.25, 'Token', getTokenSize());
 }
 
+function createPlayerToken() {
+    createToken(canvas.width * 0.25, canvas.height * 0.25, 'Player', getTokenSize());
+}
+
 function createToken(x, y, name, size) {
     var tokenInfo = {
         x: x,

@@ -26,11 +26,12 @@
     <hr>
     <div class="menu">
         <button onclick="howToUse()">How to use</button>
+        <button onclick="createPlayerToken()">Create my Token</button>
         <button onclick="createDefaultToken()">Create Token</button>
         Color:
         <input type="color" id="tokenColor" value="#ffffff"> Size:
         <input type="range" min="5" max="100" value="25" id="tokenSize">
-        <button onclick="removeAllTokens()">Remove all tokens</button>
+        <button onclick="removeAllTokens()">Remove all Tokens</button>
         Draw Grid:
         <input type="checkbox" id="grid" onchange="gridChange()"> Size:
         <input type="range" min="2" max="35" value="10" id="gridSize" oninput="gridChange()">

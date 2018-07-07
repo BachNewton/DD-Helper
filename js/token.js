@@ -4,7 +4,7 @@ exports.getTokens = function () {
     return tokens;
 }
 
-exports.newToken = function (tokenInfo) {
+exports.newToken = function (tokenInfo, id) {
     while (tokenHere(tokenInfo.x, tokenInfo.y)) {
         tokenInfo.x += 10;
         tokenInfo.y += 10;
@@ -15,7 +15,8 @@ exports.newToken = function (tokenInfo) {
         y: tokenInfo.y,
         name: tokenInfo.name,
         color: tokenInfo.color,
-        size: tokenInfo.size
+        size: tokenInfo.size,
+        id: id
     });
 }
 

@@ -28,16 +28,27 @@ socket.on('state', function (state) {
     for (var i = 0; i < tokens.length; i++) {
         var token = tokens[i];
 
-        ctx.fillStyle = token.color;
+        var name;
+        if (token.name == 'Player' && players[token.id] != undefined) {
+            ctx.fillStyle = players[token.id].color;
+            name = players[token.id].name;
+            if (name == '') {
+                name = 'Player';
+            }
+        } else {
+            ctx.fillStyle = token.color;
+            name = token.name;
+        }
+
         ctx.beginPath();
         ctx.arc(token.x, token.y, token.size, 0, 2 * Math.PI);
         ctx.fill();
 
         ctx.fillStyle = 'black';
-        ctx.font = getBestFontSize(token.size * 2 * 0.85, token.name);
+        ctx.font = getBestFontSize(token.size * 2 * 0.85, name);
         ctx.textAlign = 'center';
         ctx.textBaseline = "middle";
-        ctx.fillText(token.name, token.x, token.y);
+        ctx.fillText(name, token.x, token.y);
     }
 
     for (var id in players) {
