@@ -9,7 +9,7 @@
 <body>
     <div class="title">D&amp;D Helper - Coded by: Kyle Hutchinson</div>
     <hr> Player Name:
-    <input type="text" id="playerName" value="Adventurer" onchange="playerNameChange()"> Select your color:
+    <input type="text" id="playerName" value="Adventurer" oninput="playerNameChange()"> Select your color:
     <input type="color" id="playerColor" value="#ffffff" onchange="playerColorChange()"> Roll:
     <input type="range" min="1" max="6" value="1" id="diceAmount" oninput="diceRollUpdate()">
     <input type="radio" name="diceSides" value="2" onclick="diceRollUpdate()">2
@@ -27,7 +27,8 @@
     <div class="menu">
         <button onclick="howToUse()">How to use</button>
         <button onclick="createDefaultToken()">Create Token</button>
-        Size:
+        Color:
+        <input type="color" id="tokenColor" value="#ffffff"> Size:
         <input type="range" min="5" max="100" value="25" id="tokenSize">
         <button onclick="removeAllTokens()">Remove all tokens</button>
         Draw Grid:

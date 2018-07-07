@@ -13,8 +13,8 @@ exports.newToken = function (tokenInfo) {
     tokens.push({
         x: tokenInfo.x,
         y: tokenInfo.y,
-        type: tokenInfo.type,
-        color: 'white',
+        name: tokenInfo.name,
+        color: tokenInfo.color,
         size: tokenInfo.size
     });
 }

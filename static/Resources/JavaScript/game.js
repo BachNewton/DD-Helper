@@ -15,16 +15,21 @@ function getTokenSize() {
     return parseInt(document.getElementById('tokenSize').value);
 }
 
+function getTokenColor() {
+    return document.getElementById('tokenColor').value;
+}
+
 function createDefaultToken() {
     createToken(canvas.width * 0.25, canvas.height * 0.25, 'Token', getTokenSize());
 }
 
-function createToken(x, y, type, size) {
+function createToken(x, y, name, size) {
     var tokenInfo = {
         x: x,
         y: y,
-        type: type,
-        size: size
+        name: name,
+        size: size,
+        color: getTokenColor()
     };
 
     socket.emit('new token', tokenInfo);

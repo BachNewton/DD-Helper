@@ -34,10 +34,10 @@ socket.on('state', function (state) {
         ctx.fill();
 
         ctx.fillStyle = 'black';
-        ctx.font = getBestFontSize(token.size * 2 * 0.85, token.type);
+        ctx.font = getBestFontSize(token.size * 2 * 0.85, token.name);
         ctx.textAlign = 'center';
         ctx.textBaseline = "middle";
-        ctx.fillText(token.type, token.x, token.y);
+        ctx.fillText(token.name, token.x, token.y);
     }
 
     for (var id in players) {
