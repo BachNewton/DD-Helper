@@ -117,6 +117,11 @@ io.on('connection', function (socket) {
         io.sockets.emit('grid update', data);
         gridData = data;
     });
+
+    socket.on('new image', function (data) {
+        console.log('Received an image: ' + data.name);
+        io.sockets.emit('new image', data);
+    });
 });
 
 // Client updates

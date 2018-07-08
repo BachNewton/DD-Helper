@@ -1,6 +1,3 @@
-// First connect
-socket.emit('new player');
-
 function playerNameChange() {
     var name = document.getElementById('playerName').value;
     socket.emit('player name change', name);

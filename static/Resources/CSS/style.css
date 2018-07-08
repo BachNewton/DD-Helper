@@ -58,3 +58,22 @@ canvas {
 #chatInput {
     width: 87%;
 }
+
+#imagesCanvas {
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+#images {
+    margin-top: 10px;
+    border: 1px solid white;
+    padding: 5px;
+    width: 200px;
+}
+
+#imagesList {
+    border: 1px solid white;
+    padding: 5px;
+    height: 950px;
+    overflow: auto;
+}

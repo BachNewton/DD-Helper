@@ -34,7 +34,8 @@
         <button onclick="removeAllTokens()">Remove all Tokens</button>
         Draw Grid:
         <input type="checkbox" id="grid" onchange="gridChange()"> Size:
-        <input type="range" min="2" max="35" value="10" id="gridSize" oninput="gridChange()">
+        <input type="range" min="2" max="35" value="10" id="gridSize" oninput="gridChange()"> Upload Image:
+        <input type="file" accept="image/*" id="image" onchange="imageChange()">
     </div>
     <div id="mapAndChat">
         <canvas id="canvas"></canvas>
@@ -49,6 +50,13 @@
             <button onclick="sendChat()">Send</button>
         </div>
     </div>
+    <div class="cols">
+        <canvas id="imagesCanvas"></canvas>
+        <div id="images">
+            <div class="center">Images</div>
+            <div id="imagesList"></div>
+        </div>
+    </div>
 </body>
 
 <script src="static/Resources/JavaScript/globals.js"></script>
@@ -58,5 +66,6 @@
 <script src="/static/Resources/JavaScript/game.js"></script>
 <script src="static/Resources/JavaScript/keyboard.js"></script>
 <script src="static/Resources/JavaScript/render.js"></script>
+<script src="static/Resources/JavaScript/images.js"></script>
 
 </html>
