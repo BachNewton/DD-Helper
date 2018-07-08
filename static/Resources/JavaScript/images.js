@@ -103,20 +103,25 @@ socket.on('new image', function (data) {
         y: 0
     });
 
-    var imagesListElement = document.getElementById('imagesList');
+    addInputElement(data);
+});
+
+function addInputElement(data) {
     var imageCheckboxesIndex = document.getElementsByName('images').length;
 
-    var text = '';
-    text += '<input type="checkbox" name="images" value="' + data.name + '" onchange="updateImagesVisability(' + imageCheckboxesIndex + ')">';
-    text += ' ' + data.name;
+    var element = document.createElement('input');
+    element.setAttribute('type', 'checkbox');
+    element.setAttribute('name', 'images');
+    element.setAttribute('value', data.name);
+    element.setAttribute('onchange', 'updateImagesVisability(' + imageCheckboxesIndex + ')');
+    element.checked = true;
 
-    if (imagesListElement.innerHTML != '') {
-        text = '<br>' + text;
+    var imagesListElement = document.getElementById('imagesList');
+
+    if (imagesListElement.childElementCount != 0) {
+        imagesListElement.appendChild(document.createElement('br'));
     }
 
-    imagesListElement.innerHTML += text;
-
-    var imageCheckboxes = document.getElementsByName('images');
-    var lastIndex = imageCheckboxes.length - 1;
-    imageCheckboxes[lastIndex].checked = true;
-});
+    imagesListElement.appendChild(element);
+    imagesListElement.appendChild(document.createTextNode(' ' + data.name));
+}
