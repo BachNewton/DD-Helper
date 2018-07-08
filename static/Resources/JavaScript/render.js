@@ -3,7 +3,13 @@ socket.on('state', function (state) {
     var tokens = state.tokens;
 
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
+    drawGrid();
+    drawTokens(tokens, players);
+    drawPlayers(players);
+    drawInfoPannel(tokens, players);
+});
 
+function drawGrid() {
     if (getGridState()) {
         var size = getGridSize();
         var boxSize = canvas.width / size;
@@ -24,7 +30,9 @@ socket.on('state', function (state) {
             ctx.stroke();
         }
     }
+}
 
+function drawTokens(tokens, players) {
     for (var i = 0; i < tokens.length; i++) {
         var token = tokens[i];
 
@@ -50,7 +58,9 @@ socket.on('state', function (state) {
         ctx.textBaseline = "middle";
         ctx.fillText(name, token.x, token.y);
     }
+}
 
+function drawPlayers(players) {
     for (var id in players) {
         var player = players[id];
 
@@ -61,10 +71,59 @@ socket.on('state', function (state) {
 
         ctx.font = '12px Arial';
         ctx.textAlign = 'center';
-        ctx.textBaseline = "bottom";
+        ctx.textBaseline = "alphabetic";
         ctx.fillText(player.name, player.mouse.x, player.mouse.y - 10);
     }
-});
+}
+
+function drawInfoPannel(tokens, players) {
+    // Ctrl
+    if (keysHeld[17]) {
+        for (var i = tokens.length - 1; i >= 0; i--) {
+            var token = tokens[i];
+
+            if (token.name == 'Player' && players[token.id] != undefined && mouseOverToken(token)) {
+                var pannelWidth = 120;
+                var pannelHeight = 210;
+                var x = mouse.x;
+                var y = mouse.y;
+
+                if (x + pannelWidth > canvas.width) {
+                    x -= pannelWidth;
+                }
+
+                if (y + pannelHeight > canvas.height) {
+                    y -= pannelHeight;
+                }
+
+                ctx.fillStyle = 'black';
+                ctx.fillRect(x, y, pannelWidth, pannelHeight);
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 4;
+                ctx.strokeRect(x, y, pannelWidth, pannelHeight);
+
+                ctx.fillStyle = 'white';
+                ctx.font = '24px Arial';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = "top";
+                x += 5;
+                y += 5;
+                var player = players[token.id];
+                for (var stat in player.stats) {
+                    ctx.fillText(stat + ':', x, y);
+                    ctx.fillText(player.stats[stat], x + 80, y);
+                    y += 24;
+                }
+
+                break;
+            }
+        }
+    }
+}
+
+function mouseOverToken(token) {
+    return Math.hypot(mouse.x - token.x, mouse.y - token.y) <= token.size;
+}
 
 function getBestFontSize(width, text) {
     var min = 0;

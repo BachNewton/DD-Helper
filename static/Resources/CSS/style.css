@@ -36,7 +36,7 @@ canvas {
 #playerData {
     border: 1px solid white;
     padding: 5px;
-    height: 525px;
+    height: 725px;
     overflow: auto;
 }
 
@@ -51,7 +51,7 @@ canvas {
     border: 1px solid white;
     padding: 5px;
     margin-bottom: 5px;
-    height: 525px;
+    height: 725px;
     overflow: auto;
 }
 

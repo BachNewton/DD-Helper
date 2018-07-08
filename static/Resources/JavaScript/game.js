@@ -50,6 +50,7 @@ function howToUse() {
     text += '\n- Click and drag tokens to move them';
     text += '\n- Shift + click on tokens to remove them';
     text += '\n- Scroll over a token to change its size';
+    text += '\n- Hold Ctrl while hoving over a token to get its info';
     alert(text);
 }
 
