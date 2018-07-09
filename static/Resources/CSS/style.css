@@ -30,7 +30,7 @@ canvas {
     font-size: 2em;
     margin-left: 10px;
     padding: 5px;
-    width: 425px;
+    width: 100%;
 }
 
 #playerData {
@@ -44,7 +44,7 @@ canvas {
     border: 1px solid white;
     margin-left: 10px;
     padding: 5px;
-    width: 425px;
+    width: 100%;
 }
 
 #chatText {
@@ -68,7 +68,7 @@ canvas {
     margin-top: 10px;
     border: 1px solid white;
     padding: 5px;
-    width: 200px;
+    width: 100%;
 }
 
 #imagesList {
