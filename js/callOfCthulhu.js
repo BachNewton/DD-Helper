@@ -1,3 +1,5 @@
+var dice = require('./dice.js');
+
 exports.getRandomPlayerStats = function () {
     var stats = {};
 
@@ -8,10 +10,51 @@ exports.getRandomPlayerStats = function () {
     var values = [40, 50, 50, 50, 60, 60, 70, 80];
 
     for (var i = 0; i < statNames.length; i++) {
-        stats[statNames[i]] = values.splice(getRandomIndex(values), 1)[0];
+        var full = values.splice(getRandomIndex(values), 1)[0];
+        var half = Math.floor(full / 2);
+        var fifth = Math.floor(full / 5);
+
+        stats[statNames[i]] = full + ' (' + half + '/' + fifth + ')';
     }
 
+    stats['HP'] = Math.floor((getFull(stats['SIZ']) + getFull(stats['CON'])) / 10);
+    stats['SAN'] = getFull(stats['POW']);
+    stats['Luck'] = dice.roll(3, 6) * 5;
+    stats['MP'] = getFifth(stats['POW']);
+
+    var STR_plus_SIZ = getFull(stats['STR']) + getFull(stats['SIZ']);
+    var damageBonus;
+    var build;
+
+    if (STR_plus_SIZ <= 64) {
+        damageBonus = '-2;'
+        build = '-2';
+    } else if (STR_plus_SIZ <= 84) {
+        damageBonus = '-1';
+        build = '-1';
+    } else if (STR_plus_SIZ <= 124) {
+        damageBonus = 'None';
+        build = '0';
+    } else if (STR_plus_SIZ <= 164) {
+        damageBonus = '+1D4';
+        build = '+1';
+    } else {
+        damageBonus = '+1D6';
+        build = '+2';
+    }
+
+    stats['DB'] = damageBonus;
+    stats['Build'] = build;
+
     return stats;
+}
+
+function getFull(stat) {
+    return parseInt(stat.split(' ')[0]);
+}
+
+function getFifth(stat) {
+    return parseInt(stat.split('/')[1].split(')')[0]);
 }
 
 function getRandomIndex(array) {
@@ -100,5 +143,50 @@ var occupations = [
     'Designer',
     'Dilettante',
     'DJ',
-    'Drifter'
+    'Drifter',
+    'Editor',
+    'Elected official',
+    'Entertainer',
+    'Explorer',
+    'Farmer',
+    'Farm Hand',
+    'Federal Agent',
+    'Fence',
+    'Field Researcher',
+    'Film Crew',
+    'Film Star',
+    'Fireman',
+    'Foreign Correspondent',
+    'Forger',
+    'Counterfeiter',
+    'Forester',
+    'Forensic Investigator',
+    'Forensic Surgeon',
+    'Gambler',
+    'Gangster',
+    'Gardener',
+    'Golf Pro',
+    'Gravedigger',
+    'Hacker',
+    'Hired Goon',
+    'Hit Man',
+    'Hobo',
+    'Hooker',
+    'Journalist',
+    'Judge',
+    'Lawyer',
+    'Librarian',
+    'Loan Shark',
+    'Lumberjack',
+    'Manager',
+    'Coach',
+    '(Medical) Technician',
+    'Mental Hospital Attendant',
+    'Mercenary',
+    'Military Officer',
+    'Miner',
+    'Missionary',
+    'Mountain Climber',
+    'Museum Curator',
+    'Musician'
 ];
