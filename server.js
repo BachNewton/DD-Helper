@@ -130,6 +130,7 @@ setInterval(function () {
     players.updateHeldTokens(tokens.getTokens());
     players.moveHeldTokens(tokens.getTokens());
     players.removeTokens(tokens.getTokens());
+    players.updateMeasurePoints();
 
     var state = {
         players: players.getPlayers(),

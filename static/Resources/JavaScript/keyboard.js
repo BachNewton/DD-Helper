@@ -11,7 +11,11 @@ document.addEventListener('keyup', function (event) {
 
 function checkKey(keyCode) {
     // T
-    if (keyCode == 84 && document.activeElement != document.getElementById('chatInput') && document.activeElement != document.getElementById('playerName')) {
+    if (keyCode == 84 && focusNotInTextBox()) {
         createToken(mouse.x, mouse.y, 'Token', getTokenSize());
     }
+}
+
+function focusNotInTextBox() {
+    return document.activeElement != document.getElementById('chatInput') && document.activeElement != document.getElementById('playerName');
 }

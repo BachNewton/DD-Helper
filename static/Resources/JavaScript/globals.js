@@ -30,3 +30,7 @@ function getGridState() {
 function getGridSize() {
     return parseInt(document.getElementById('gridSize').value);
 }
+
+function getBoxSize() {
+    return boxSize = canvas.width / getGridSize();
+}

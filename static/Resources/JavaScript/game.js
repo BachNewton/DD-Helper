@@ -48,6 +48,7 @@ function howToUse() {
     text += '\n- Shift + click on tokens to remove them';
     text += '\n- Scroll over a token to change its size';
     text += '\n- Hold Ctrl while hoving over a token to get its info';
+    text += '\n- Hold \'Z\' to measure distance.';
     alert(text);
 }
 

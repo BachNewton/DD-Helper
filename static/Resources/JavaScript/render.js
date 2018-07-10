@@ -6,13 +6,13 @@ socket.on('state', function (state) {
     drawGrid();
     drawTokens(tokens, players);
     drawPlayers(players);
+    drawMeasureLines(players)
     drawInfoPannel(tokens, players);
 });
 
 function drawGrid() {
     if (getGridState()) {
-        var size = getGridSize();
-        var boxSize = canvas.width / size;
+        var boxSize = getBoxSize();
         ctx.strokeStyle = 'gray';
         ctx.lineWidth = 3;
 
@@ -73,6 +73,37 @@ function drawPlayers(players) {
         ctx.textAlign = 'center';
         ctx.textBaseline = "alphabetic";
         ctx.fillText(player.name, player.mouse.x, player.mouse.y - 10);
+    }
+}
+
+function drawMeasureLines(players) {
+    for (var id in players) {
+        var player = players[id];
+
+        if (player.measurePoint != null) {
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.moveTo(player.measurePoint.x, player.measurePoint.y);
+            ctx.lineTo(player.mouse.x, player.mouse.y);
+            ctx.stroke();
+
+            var halfX = (player.measurePoint.x + player.mouse.x) / 2;
+            var halfY = (player.measurePoint.y + player.mouse.y) / 2;
+            var distance = Math.hypot(player.measurePoint.x - player.mouse.x, player.measurePoint.y - player.mouse.y);
+
+            if (getGridState()) {
+                distance = distance / getBoxSize();
+            }
+
+            distance = distance.toFixed(1);
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = 'white';
+            ctx.font = '34px Arial';
+            ctx.fillText(distance, halfX, halfY);
+        }
     }
 }
 

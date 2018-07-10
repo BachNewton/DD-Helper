@@ -22,6 +22,7 @@ exports.newPlayer = function (id) {
             token: null
         },
         canDelete: true,
+        measurePoint: null,
         stats: coc.getRandomPlayerStats()
     };
 }
@@ -150,4 +151,22 @@ exports.removeTokens = function (tokens) {
 
 function playerOverToken(player, token) {
     return Math.hypot(player.mouse.x - token.x, player.mouse.y - token.y) <= token.size;
+}
+
+exports.updateMeasurePoints = function () {
+    for (var id in players) {
+        var player = players[id];
+
+        // Z
+        if (player.keysHeld[90]) {
+            if (player.measurePoint == null) {
+                player.measurePoint = {
+                    x: player.mouse.x,
+                    y: player.mouse.y
+                };
+            }
+        } else {
+            player.measurePoint = null;
+        }
+    }
 }
