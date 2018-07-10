@@ -38,6 +38,7 @@ canvas {
     padding: 5px;
     height: 725px;
     overflow: auto;
+    white-space: nowrap;
 }
 
 #chatBox {
@@ -56,7 +57,11 @@ canvas {
 }
 
 #chatInput {
-    width: 87%;
+    width: 85%;
+}
+
+#sendButton {
+    width: 15%;
 }
 
 #imagesCanvas {

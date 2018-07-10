@@ -83,8 +83,18 @@ function drawInfoPannel(tokens, players) {
             var token = tokens[i];
 
             if (token.name == 'Player' && players[token.id] != undefined && mouseOverToken(token)) {
-                var pannelWidth = 120;
-                var pannelHeight = 210;
+                var player = players[token.id];
+
+                var fontSize = 24;
+                ctx.font = fontSize + 'px Arial';
+
+                var largestWidthStatName = getLargestWidthStatName(player.stats);
+                var largestWidthStatValue = getLargestWidthStatValue(player.stats);
+                var padding = 5;
+
+                var pannelWidth = padding + largestWidthStatName + padding + largestWidthStatValue + padding;
+                var pannelHeight = padding + fontSize * Object.keys(player.stats).length + padding;
+
                 var x = mouse.x;
                 var y = mouse.y;
 
@@ -103,22 +113,49 @@ function drawInfoPannel(tokens, players) {
                 ctx.strokeRect(x, y, pannelWidth, pannelHeight);
 
                 ctx.fillStyle = 'white';
-                ctx.font = '24px Arial';
                 ctx.textAlign = 'left';
-                ctx.textBaseline = "top";
-                x += 5;
-                y += 5;
-                var player = players[token.id];
+                ctx.textBaseline = 'top';
+                x += padding;
+                y += padding;
+
                 for (var stat in player.stats) {
                     ctx.fillText(stat + ':', x, y);
-                    ctx.fillText(player.stats[stat], x + 80, y);
-                    y += 24;
+                    ctx.fillText(player.stats[stat], x + largestWidthStatName + padding, y);
+                    y += fontSize;
                 }
 
                 break;
             }
         }
     }
+}
+
+function getLargestWidthStatName(stats) {
+    var max = 0;
+
+    for (var statName in stats) {
+        var width = ctx.measureText(statName + ':').width;
+
+        if (width > max) {
+            max = width;
+        }
+    }
+
+    return max;
+}
+
+function getLargestWidthStatValue(stats) {
+    var max = 0;
+
+    for (var statName in stats) {
+        var width = ctx.measureText(stats[statName]).width;
+
+        if (width > max) {
+            max = width;
+        }
+    }
+
+    return max;
 }
 
 function mouseOverToken(token) {
