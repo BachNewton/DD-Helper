@@ -100,7 +100,7 @@ io.on('connection', function (socket) {
         var player = players.getPlayers()[socket.id];
 
         if (player != undefined) {
-            var amount = dice.roll(data.diceAmount, data.diceSides);
+            var amount = dice.roll(data.diceAmount, data.diceSides) + data.diceMod;
 
             console.log(player.name + ' rolled a: ' + amount);
 
@@ -108,7 +108,8 @@ io.on('connection', function (socket) {
                 player: player,
                 amount: amount,
                 diceAmount: data.diceAmount,
-                diceSides: data.diceSides
+                diceSides: data.diceSides,
+                diceMod: data.diceMod
             });
         }
     });

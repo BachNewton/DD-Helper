@@ -64,3 +64,13 @@ socket.on('grid update', function (data) {
     document.getElementById('grid').checked = data.state;
     document.getElementById('gridSize').value = data.size;
 });
+
+function addToDiceMod(change) {
+    var diceMod = getDiceMod() + change;
+
+    if (diceMod >= 0) {
+        diceMod = '+' + diceMod;
+    }
+
+    document.getElementById('diceMod').innerText = diceMod;
+}

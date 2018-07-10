@@ -18,14 +18,20 @@ socket.on('roll', function (data) {
     var amount = data.amount;
     var diceAmount = data.diceAmount;
     var diceSides = data.diceSides;
+    var diceMod = data.diceMod;
 
     var text = '';
     text += 'ROLL: ';
     text += getColoredHTMLText(player.color, player.name);
     text += ' rolled ';
-    text += diceAmount;
-    text += 'D';
-    text += diceSides;
+    var diceText = diceAmount;
+    diceText += 'D';
+    diceText += diceSides;
+    if (diceMod >= 0) {
+        diceText += '+';
+    }
+    diceText += diceMod;
+    text += getColoredHTMLText('orange', diceText);
     text += ' and got a: ';
     text += getColoredHTMLText('cyan', amount);
     text += '!';

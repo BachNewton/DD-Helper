@@ -12,19 +12,25 @@ function getDiceSides() {
     }
 }
 
+function getDiceMod() {
+    return parseInt(document.getElementById('diceMod').innerText);
+}
+
 function diceRollUpdate() {
     var diceAmount = getDiceAmount();
     var diceSides = getDiceSides();
-    var text = diceAmount + 'D' + diceSides;
+    var text = diceAmount + 'D' + diceSides + document.getElementById('diceMod').innerText;
     document.getElementById('diceRollText').innerHTML = text;
 }
 
 function roll() {
     var diceAmount = getDiceAmount();
     var diceSides = getDiceSides();
+    var diceMod = getDiceMod();
 
     socket.emit('roll', {
         diceAmount: diceAmount,
-        diceSides: diceSides
+        diceSides: diceSides,
+        diceMod: diceMod
     });
 }
