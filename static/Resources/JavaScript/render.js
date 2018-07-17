@@ -216,24 +216,60 @@ function getBestFontSize(width, text) {
 }
 
 socket.on('player data update', function (stats) {
-    var text = '<div class="cols">';
+    local_stats = stats;
 
-    text += '<div>';
+    var table = document.createElement('table');
+    table.setAttribute('style', 'font-size: 1em;');
+
     for (var stat in stats) {
-        text += stat;
-        text += ': ';
-        text += '<br>';
+        var row = document.createElement('tr');
+
+        var col1 = document.createElement('td');
+        var textNode = document.createTextNode(stat + ':');
+        col1.appendChild(textNode);
+
+        var col2 = document.createElement('td');
+        textNode = document.createTextNode(stats[stat]);
+        col2.appendChild(textNode);
+
+        row.appendChild(col1);
+        row.appendChild(col2);
+
+        table.appendChild(row);
     }
-    text += '</div>';
 
-    text += '<div>';
-    for (var stat in stats) {
-        text += stats[stat];
-        text += '<br>';
-    }
-    text += '</div>';
-
-    text += '</div>';
-
-    document.getElementById('playerData').innerHTML = text;
+    document.getElementById('playerData').innerHTML = '';
+    document.getElementById('playerData').appendChild(table);
 });
+
+function playerEditMode() {
+    var stats = local_stats;
+
+    var table = document.createElement('table');
+    table.setAttribute('style', 'font-size: 1em;');
+
+    for (var stat in stats) {
+        var row = document.createElement('tr');
+
+        var col1 = document.createElement('td');
+        var textNode = document.createTextNode(stat + ':');
+        col1.appendChild(textNode);
+
+        var col2 = document.createElement('td');
+
+        var inputElement = document.createElement('input');
+        inputElement.setAttribute('style', 'font-size: 1em;');
+        inputElement.setAttribute('type', 'text');
+        inputElement.setAttribute('value', stats[stat]);
+
+        col2.appendChild(inputElement);
+
+        row.appendChild(col1);
+        row.appendChild(col2);
+
+        table.appendChild(row);
+    }
+
+    document.getElementById('playerData').innerHTML = '';
+    document.getElementById('playerData').appendChild(table);
+}
