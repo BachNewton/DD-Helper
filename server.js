@@ -41,6 +41,16 @@ io.on('connection', function (socket) {
         });
     });
 
+    socket.on('player data update', function (stats) {
+        var player = players.getPlayers()[socket.id];
+
+        if (player != undefined) {
+            console.log('Stats change: ' + player.name + ' changed their stats!');
+            player.stats = stats;
+            socket.emit('player data update', stats);
+        }
+    });
+
     socket.on('disconnect', function () {
         console.log('A player has disconnected! ID: ' + socket.id);
         players.remove(socket.id);

@@ -17,5 +17,19 @@ function checkKey(keyCode) {
 }
 
 function focusNotInTextBox() {
-    return document.activeElement != document.getElementById('chatInput') && document.activeElement != document.getElementById('playerName');
+    return document.activeElement != document.getElementById('chatInput') && document.activeElement != document.getElementById('playerName') && focusNotInStatsInputTextBox();
+}
+
+function focusNotInStatsInputTextBox() {
+    statsInputs = document.getElementsByName('statsInputs');
+
+    for (var i = 0; i < statsInputs.length; i++) {
+        var statsInput = statsInputs[i];
+
+        if (document.activeElement == statsInput) {
+            return false;
+        }
+    }
+
+    return true;
 }

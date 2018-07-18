@@ -246,7 +246,7 @@ function playerEditMode() {
     var stats = local_stats;
 
     var table = document.createElement('table');
-    table.setAttribute('style', 'font-size: 1em;');
+    table.setAttribute('style', 'font-size: 0.8em;');
 
     for (var stat in stats) {
         var row = document.createElement('tr');
@@ -260,6 +260,7 @@ function playerEditMode() {
         var inputElement = document.createElement('input');
         inputElement.setAttribute('style', 'font-size: 1em;');
         inputElement.setAttribute('type', 'text');
+        inputElement.setAttribute('name', 'statsInputs');
         inputElement.setAttribute('value', stats[stat]);
 
         col2.appendChild(inputElement);
@@ -272,4 +273,22 @@ function playerEditMode() {
 
     document.getElementById('playerData').innerHTML = '';
     document.getElementById('playerData').appendChild(table);
+
+    document.getElementById('playerEdit').innerText = 'Save';
+    document.getElementById('playerEdit').onclick = saveStats;
+}
+
+function saveStats() {
+    statsInputs = document.getElementsByName('statsInputs');
+
+    var i = 0;
+    for (var stat in local_stats) {
+        local_stats[stat] = statsInputs[i].value;
+        i++;
+    }
+
+    socket.emit('player data update', local_stats);
+
+    document.getElementById('playerEdit').innerText = 'Edit';
+    document.getElementById('playerEdit').onclick = playerEditMode;
 }
