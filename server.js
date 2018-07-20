@@ -7,6 +7,7 @@ var socketIO = require('socket.io');
 var players = require('./js/player.js');
 var tokens = require('./js/token.js');
 var dice = require('./js/dice.js');
+var background = require('./js/background.js');
 var gridData = { state: false, size: 10 };
 
 var app = express();
@@ -33,6 +34,7 @@ io.on('connection', function (socket) {
         console.log('A new player has connected! ID: ' + socket.id);
         players.newPlayer(socket.id);
         socket.emit('player data update', players.getPlayers()[socket.id].stats);
+        socket.emit('new background image', background.get());
         socket.emit('grid update', gridData);
         io.sockets.emit('chat message', {
             playerName: 'Server',
@@ -46,6 +48,7 @@ io.on('connection', function (socket) {
 
         if (player != undefined) {
             console.log('Stats change: ' + player.name + ' changed their stats!');
+            players.logChange(player.stats, stats);
             player.stats = stats;
             socket.emit('player data update', stats);
         }
@@ -130,8 +133,14 @@ io.on('connection', function (socket) {
     });
 
     socket.on('new image', function (data) {
-        console.log('Received an image: ' + data.name);
+        console.log('Received a context image: ' + data.name);
         io.sockets.emit('new image', data);
+    });
+
+    socket.on('new background image', function (data) {
+        console.log('Received a background image');
+        background.set(data);
+        io.sockets.emit('new background image', background.get());
     });
 });
 
@@ -139,12 +148,15 @@ io.on('connection', function (socket) {
 setInterval(function () {
     players.updateHeldTokens(tokens.getTokens());
     players.moveHeldTokens(tokens.getTokens());
+    players.updateHeldBackground(background.get());
+    players.moveHeldBackground();
     players.removeTokens(tokens.getTokens());
     players.updateMeasurePoints();
 
     var state = {
         players: players.getPlayers(),
-        tokens: tokens.getTokens()
+        tokens: tokens.getTokens(),
+        backgroundState: background.getState()
     };
 
     io.sockets.emit('state', state);

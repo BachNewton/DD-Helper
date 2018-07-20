@@ -1,5 +1,10 @@
 setInterval(drawImages, 1000 / 60);
 
+var imageSelect = document.createElement('input');
+imageSelect.setAttribute('type', 'file');
+imageSelect.setAttribute('accept', 'image/*');
+imageSelect.onchange = imageChange;
+
 function drawImages() {
     updateHeldImage();
     moveHeldImage();
@@ -75,8 +80,12 @@ function bringImageToFront(index) {
     images.push(images.splice(index, 1)[0]);
 }
 
+function imageButton() {
+    imageSelect.click();
+}
+
 function imageChange() {
-    var file = document.getElementById('image').files[0];
+    var file = imageSelect.files[0];
     var reader = new FileReader();
 
     reader.addEventListener('load', function () {

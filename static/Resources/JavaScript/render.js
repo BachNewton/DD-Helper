@@ -1,8 +1,10 @@
 socket.on('state', function (state) {
     var players = state.players;
     var tokens = state.tokens;
+    var backgroundState = state.backgroundState;
 
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
+    drawBackground(backgroundState);
     drawGrid();
     drawTokens(tokens, players);
     drawPlayers(players);
@@ -14,7 +16,7 @@ function drawGrid() {
     if (getGridState()) {
         var boxSize = getBoxSize();
         ctx.strokeStyle = 'gray';
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 1;
 
         for (var x = boxSize; x < canvas.width; x += boxSize) {
             ctx.beginPath();
